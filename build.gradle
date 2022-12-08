@@ -4,13 +4,17 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+        google()
     }
 
     dependencies {
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath 'org.openjfx:javafx-plugin:0.0.7'
     }
 }
+
+apply plugin: 'maven-publish'
 
 apply plugin: 'org.openjfx.javafxplugin'
 
@@ -18,7 +22,7 @@ apply plugin: 'org.openjfx.javafxplugin'
 apply from: rootProject.file("gradle/welcome.gradle")
 
 wrapper {
-    gradleVersion = '5.4.1'
+    gradleVersion = '7.6'
     distributionUrl = "https://services.gradle.org/distributions/" +
         "gradle-${gradleVersion}-bin.zip"
 }
@@ -47,17 +51,18 @@ task("initSourceDirs", group: "build setup").doLast {
 apply plugin: "java"
 
 repositories {
-    jcenter()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 javafx {
     modules = [ 'javafx.controls', 'javafx.graphics' ]
-    version = '12.0.1'
+    version = '17'
 }
 
 // java language level.
-sourceCompatibility = "9"
-targetCompatibility = "9"
+sourceCompatibility = "17"
+targetCompatibility = "17"
 
 // configure publish tasks.
 apply from: rootProject.file("gradle/publish-bintray.gradle")
@@ -122,5 +127,21 @@ jar {
         "Implementation-Vendor": project.vendor,
         "Automatic-Module-Name": "org.testfx.monocle",
     )
+}
+
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.java
+                groupId = 'com.github.4rgc'
+                artifactId = 'Monocle'
+                version = '17.0.2+08'
+            }
+        }
+    }
 }
 

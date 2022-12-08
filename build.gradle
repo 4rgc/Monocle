@@ -113,21 +113,6 @@ ext {
     javaVmVersion = System.properties["java.vm.version"]
 }
 
-
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-                from components.java
-                groupId = 'com.github.4rgc'
-                artifactId = 'Monocle'
-                version = 'v17+08'
-            }
-        }
-    }
-}
-
 jar {
     manifest.attributes(
         "Created-By": project.javaVersion +
@@ -142,5 +127,21 @@ jar {
         "Implementation-Vendor": project.vendor,
         "Automatic-Module-Name": "org.testfx.monocle",
     )
+}
+
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.java
+                groupId = 'com.github.4rgc'
+                artifactId = 'Monocle'
+                version = '17.0.2+08'
+            }
+        }
+    }
 }
 

@@ -27,7 +27,7 @@ testCompile "org.testfx:openjfx-monocle:8u76-b04" // For Java 8
 <dependency>
     <groupId>org.testfx</groupId>
     <artifactId>openjfx-monocle</artifactId>
-    <version>jdk-17.0.2+8</version> <!-- 12.0.1+2 for Java 12, jdk-11+26 for Java 11, jdk-9+181 for Java 9, 8u76-b04 for Java 8 -->
+    <version>17.0.2+8</version> <!-- 12.0.1+2 for Java 12, jdk-11+26 for Java 11, jdk-9+181 for Java 9, 8u76-b04 for Java 8 -->
     <scope>test</scope>
 </dependency>
 ```
